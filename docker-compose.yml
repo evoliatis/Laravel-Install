@@ -1,0 +1,50 @@
+# Samuel COLLADO <scollado@evoliatis.com>
+# Replace build line by build if you want to use fresh images
+#
+# Two directory will be created : web and mysql in the same place
+# * web : from laravel application
+# * mysql : MySQL database file
+#
+# Enjoy !
+
+# Database
+mysql:
+  image: mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: secret
+    MYSQL_USER: laravel
+    MYSQL_PASSWORD: laravel
+    MYSQL_DATABASE: laravel
+  volumes:
+    - ./mysql:/var/lib/mysql
+  labels:
+    traefik.enable: "false"
+
+# PHP Engine
+engine:
+  build: laravel:engine
+  volumes:
+    - ./web:/var/www/html
+  entrypoint:
+    - php-fpm
+  links:
+    - mysql
+
+# Web front
+front:
+  build: laravel:front
+  volumes_from:
+    - engine
+  links:
+    - engine
+  ports:
+    - "80:80"
+    
+# Admin database
+phpmyadmin:
+  image: nazarpc/phpmyadmin
+  links:
+    - mysql
+  ports:
+    - "8080:80"
+
