@@ -18,7 +18,7 @@ docker-compose up -d
 
 ## Install for the first time 
 
-If it's your first start of your projet, you need to install laravel and init the web directory manualy. Don't panic, an install script is provided in the laravel_engine container. 
+If it's your first start of your project, you need to install laravel and init the web directory manualy. Don't panic, an install script is provided in the laravel_engine container. 
 
 Just launch : 
 
