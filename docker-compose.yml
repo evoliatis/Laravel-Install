@@ -22,7 +22,7 @@ mysql:
 
 # PHP Engine
 engine:
-  build: laravel:engine
+  build: laravel_engine
   volumes:
     - ./web:/var/www/html
   entrypoint:
@@ -32,7 +32,7 @@ engine:
 
 # Web front
 front:
-  build: laravel:front
+  build: laravel_front
   volumes_from:
     - engine
   links:
