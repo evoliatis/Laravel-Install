@@ -4,6 +4,7 @@
 # Two directory will be created : web and mysql in the same place
 # * web : from laravel application
 # * mysql : MySQL database file
+# * redis : Redis database file
 #
 # Enjoy !
 
@@ -17,8 +18,11 @@ mysql:
     MYSQL_DATABASE: laravel
   volumes:
     - ./mysql:/var/lib/mysql
-  labels:
-    traefik.enable: "false"
+
+redis:
+  image: redis:alpine
+  volumes:
+    - ./redis:/data
 
 # PHP Engine
 engine:
@@ -29,6 +33,7 @@ engine:
     - php-fpm
   links:
     - mysql
+    - redis
 
 # Web front
 front:

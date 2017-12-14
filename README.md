@@ -23,7 +23,7 @@ If it's your first start of your project, you need to install laravel and init t
 Just launch : 
 
 ~~~~
-docker exec <project_engine_1> /install.sh
+docker exec <project_engine_1> sh /install.sh
 ~~~~
 
 You can find the exact laravel engine container name with the command (the container ended by engine_1) :
