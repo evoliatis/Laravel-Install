@@ -10,3 +10,5 @@ else
   echo "PUBLIC directory already exist..."
   echo "SORRY : I don't want to break your actual project"
 fi
+
+exit 0
