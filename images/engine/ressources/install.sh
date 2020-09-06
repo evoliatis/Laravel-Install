@@ -1,5 +1,5 @@
 #!/bin/sh
-if [ ! -d /var/www/html/public ] ; then
+if [ -d /var/www/html/public ] ; then
   echo "PUBLIC directory already exist..."
   echo "SORRY : I don't want to break your actual project"
   exit 1

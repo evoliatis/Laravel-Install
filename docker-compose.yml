@@ -13,7 +13,8 @@ services:
 
   # Database
   mysql:
-    build: images/mysql
+    # build: images/mysql
+    image: evoliatis/laravel_mysql
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_USER: laravel
@@ -25,13 +26,15 @@ services:
       - "3306:3306"
 
   redis:
-    build: images/redis
+    # build: images/redis
+    image: evoliatis/laravel_redis
     volumes:
       - ./redis:/data
 
   # PHP Engine
   engine:
-    build: images/engine
+    # build: images/engine
+    image: evoliatis/laravel_engine
     volumes:
       - ./web:/var/www/html
     entrypoint:
@@ -42,7 +45,8 @@ services:
 
   # Web front
   front:
-    build: images/front
+    # build: images/front
+    image: evoliatis/laravel_front
     volumes:
       - ./web:/var/www/html
     links:

@@ -42,3 +42,7 @@ You can now access to your project and phpmyadmin :
 * http://localhost:8080 : PHPMyAdmin (default root password is *"secret"*)
 
 For docker toolbox users (Windows 7 or old MacOS), the default IP is usually : **192.168.99.100** instead of **localhost**
+
+## DevOps Only
+
+If you want, you can change *image* keyword by *build* instruction (commented in the **docker-compose.yml**) in order to contruct your own images instead of using evoliatis ones !

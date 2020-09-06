@@ -24,6 +24,6 @@ RUN docker-php-source extract \
 
 RUN apk add --update nodejs npm
 
-WORKDIR /var/www
+WORKDIR /var/www/html
 
 USER www-data
