@@ -7,51 +7,54 @@
 # * redis : Redis database file
 #
 # Enjoy !
+version: "3"
 
-# Database
-mysql:
-  build: images/mysql
-  environment:
-    MYSQL_ROOT_PASSWORD: secret
-    MYSQL_USER: laravel
-    MYSQL_PASSWORD: laravel
-    MYSQL_DATABASE: laravel
-  volumes:
-    - ./mysql:/var/lib/mysql
-  ports:
-    - "3306:3306"
+services:
 
-redis:
-  build: images/redis
-  volumes:
-    - ./redis:/data
+  # Database
+  mysql:
+    build: images/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+      MYSQL_DATABASE: laravel
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
 
-# PHP Engine
-engine:
-  build: images/engine
-  volumes:
-    - ./web:/var/www
-  entrypoint:
-    - php-fpm
-  links:
-    - mysql
-    - redis
+  redis:
+    build: images/redis
+    volumes:
+      - ./redis:/data
 
-# Web front
-front:
-  build: images/front
-  volumes:
-    - ./web:/var/www
-  links:
-    - engine
-  ports:
-    - "80:80"
-    
-# Admin database
-phpmyadmin:
-  image: nazarpc/phpmyadmin
-  links:
-    - mysql
-  ports:
-    - "8080:80"
+  # PHP Engine
+  engine:
+    build: images/engine
+    volumes:
+      - ./web:/var/www/html
+    entrypoint:
+      - php-fpm
+    links:
+      - mysql
+      - redis
+
+  # Web front
+  front:
+    build: images/front
+    volumes:
+      - ./web:/var/www/html
+    links:
+      - engine
+    ports:
+      - "80:80"
+      
+  # Admin database
+  phpmyadmin:
+    image: nazarpc/phpmyadmin
+    links:
+      - mysql
+    ports:
+      - "8080:80"
 

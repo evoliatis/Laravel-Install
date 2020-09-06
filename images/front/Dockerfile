@@ -2,7 +2,7 @@ FROM nginx:stable-alpine
 
 COPY ressources /
 
-RUN mkdir -p /var/www
+RUN mkdir -p /var/www/html  ; sed -i '3 a chown nginx:www-data /var/www/html' /docker-entrypoint.sh
 
-VOLUME [ "/var/www" , "/var/log/nginx" ]
+VOLUME [ "/var/www/html" , "/var/log/nginx" ]
 

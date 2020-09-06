@@ -8,7 +8,8 @@ RUN apk upgrade --update && apk add --no-cache tzdata libzip-dev zlib-dev freety
         && docker-php-ext-install  pcntl gd zip pdo_mysql \
         && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
         && php composer-setup.php && php -r "unlink('composer-setup.php');" \
-        && mv composer.phar /usr/local/bin/composer && chown www-data:www-data /var/www
+        && mv composer.phar /usr/local/bin/composer \
+        && mkdir -p /var/www/html ; chown www-data:www-data -R /var/www
 
 # php-redis
 ENV PHPREDIS_VERSION="5.3.1"
@@ -22,5 +23,7 @@ RUN docker-php-source extract \
     && docker-php-source delete
 
 RUN apk add --update nodejs npm
+
+WORKDIR /var/www
 
 USER www-data
