@@ -16,6 +16,8 @@ Go to the Laravel_install directory with docker console and launch :
 docker-compose up -d
 ~~~
 
+This command will build all docker images locally
+
 ## Install for the first time 
 
 If it's your first start of your project, you need to install laravel and init the web directory manualy. Don't panic, an install script is provided in the laravel_engine container. 

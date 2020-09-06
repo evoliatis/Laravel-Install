@@ -10,7 +10,7 @@
 
 # Database
 mysql:
-  image: mysql:5.7
+  build: images/mysql
   environment:
     MYSQL_ROOT_PASSWORD: secret
     MYSQL_USER: laravel
@@ -22,16 +22,15 @@ mysql:
     - "3306:3306"
 
 redis:
-  image: redis:alpine
+  build: images/redis
   volumes:
     - ./redis:/data
 
 # PHP Engine
 engine:
-  image: evoliatis/laravel_engine:7.3
-  # build: laravel_engine
+  build: images/engine
   volumes:
-    - ./web:/var/www/html
+    - ./web:/var/www
   entrypoint:
     - php-fpm
   links:
@@ -40,9 +39,9 @@ engine:
 
 # Web front
 front:
-  image: evoliatis/laravel_front
-  volumes_from:
-    - engine
+  build: images/front
+  volumes:
+    - ./web:/var/www
   links:
     - engine
   ports:
