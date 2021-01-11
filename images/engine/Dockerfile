@@ -1,6 +1,6 @@
-FROM php:7.4-fpm-alpine
+FROM php:8.0-fpm-alpine
 ADD ressources /
-RUN apk upgrade --update && apk add --no-cache tzdata libzip-dev zlib-dev freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
+RUN apk upgrade --update && apk add --no-cache tzdata libzip-dev zlib-dev freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev nodejs-current npm \
         && cp /usr/share/zoneinfo/Europe/Paris /etc/localtime && echo "Europe/Paris" >  /etc/timezone \
         && docker-php-ext-configure gd  \
         && docker-php-ext-configure zip \
@@ -12,7 +12,7 @@ RUN apk upgrade --update && apk add --no-cache tzdata libzip-dev zlib-dev freety
         && mkdir -p /var/www/html ; chown www-data:www-data -R /var/www
 
 # php-redis
-ENV PHPREDIS_VERSION="5.3.1"
+ENV PHPREDIS_VERSION="5.3.2"
 
 RUN docker-php-source extract \
     && curl -L -o /tmp/redis.tar.gz "https://github.com/phpredis/phpredis/archive/${PHPREDIS_VERSION}.tar.gz" \
@@ -21,8 +21,6 @@ RUN docker-php-source extract \
     && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
     && docker-php-ext-install redis \
     && docker-php-source delete
-
-RUN apk add --update nodejs npm
 
 WORKDIR /var/www/html
 

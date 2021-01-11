@@ -1,7 +1,6 @@
 # Samuel COLLADO <scollado@evoliatis.com>
-# Replace build line by build if you want to use fresh images
 #
-# Two directory will be created : web and mysql in the same place
+# Three directory will be created : web, redis and mysql in the same place
 # * web : from laravel application
 # * mysql : MySQL database file
 # * redis : Redis database file
@@ -13,8 +12,7 @@ services:
 
   # Database
   mysql:
-    # build: images/mysql
-    image: evoliatis/laravel_mysql
+    build: images/mysql
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_USER: laravel
@@ -26,15 +24,13 @@ services:
       - "3306:3306"
 
   redis:
-    # build: images/redis
-    image: evoliatis/laravel_redis
+    build: images/redis
     volumes:
       - ./redis:/data
 
   # PHP Engine
   engine:
-    # build: images/engine
-    image: evoliatis/laravel_engine
+    build: images/engine
     volumes:
       - ./web:/var/www/html
     entrypoint:
@@ -45,14 +41,13 @@ services:
 
   # Web front
   front:
-    # build: images/front
-    image: evoliatis/laravel_front
+    build: images/front
     volumes:
       - ./web:/var/www/html
     links:
       - engine
     ports:
-      - "80:80"
+      - "8000:80"
       
   # Admin database
   phpmyadmin:

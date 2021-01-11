@@ -4,7 +4,7 @@ PHP Engine for my [Laravel-Install](https://github.com/evoliatis/Laravel-Install
 
 # Details
 
-This PHP-FPM 7.4 from PHP-FPM:alpine image has been modified :
+This PHP-FPM 8.0 from PHP-FPM:alpine image has been modified :
 
 - Added GD
 - Added ZIP
@@ -13,4 +13,4 @@ This PHP-FPM 7.4 from PHP-FPM:alpine image has been modified :
 - Added Redis (new)
 - Added pcntl (new for Laravel Horizon)
 
-Updated to php 7.4 (Laravel 7.x, 8.x...)
+Updated to php 8.0 (Laravel 7.x, 8.x...)
